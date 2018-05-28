@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "StudentCard";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StudentCard</title>
+</head>
+<body>
+    <div>
+        Для отображения данных и сохранения их в БД выберите файл:
+
+        @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input id="fileInput" type="file" name="file" accept=".xml">
+            <input type="submit" value="Загрузить" />
+        }
+
+        @{
+            foreach (var d in ViewBag.dataBase)
+            {
+                <p>
+                    Студент: @d.fio<br>
+                    Возраст: @d.age<br>
+                    Факультет: @d.fak<br>
+                    Направление подготовки: @d.direction<br>
+                    Курс студента: @d.course<br>
+                    Опыт участия в конкурсах: @d.expirience
+                </p>
+            }
+        }
+        @using (Html.BeginForm("DropTable", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="submit" value="Удалить данные" />
+        }
+        <p></p>
+        @using (Html.BeginForm("DownLoadExcelFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="submit" value="Сохранить данные в Excel" />
+        }
+
+    </div>
+</body>
+</html>
